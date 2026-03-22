@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gen Z Math Competition — Latest Updates</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body { font-family: 'Sora', sans-serif; box-sizing: border-box; }
+    .mono { font-family: 'Space Mono', monospace; }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.6); opacity: 0.5; }
+    }
+
+    .anim-slide-up { animation: slideUp 0.5s ease-out both; }
+    .anim-fade { animation: fadeIn 0.4s ease-out both; }
+    .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+    .card-update {
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .card-update:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+    }
+
+    .cat-announcement { border-left: 4px solid #facc15; }
+    .cat-results { border-left: 4px solid #34d399; }
+    .cat-general { border-left: 4px solid #818cf8; }
+
+    .badge-announcement { background: #facc1520; color: #ca8a04; }
+    .badge-results { background: #34d39920; color: #059669; }
+    .badge-general { background: #818cf820; color: #6366f1; }
+
+    .grain-overlay {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+
+    .modal-backdrop {
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+    }
+
+    .inline-confirm {
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .media-frame {
+      border: 2px dashed rgba(255,255,255,0.15);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 3px; }
+  </style>
+</head>
+
+<body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto grain-overlay" style="background: #0f0f1a;">
+
+    <!-- NAV -->
+    <header class="sticky top-0 z-50" style="background: rgba(15,15,26,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06);">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div style="width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; background: linear-gradient(135deg, #8b5cf6, #3b82f6); color: white;">
+            π
+          </div>
+          <span id="nav-title" class="font-bold text-base sm:text-lg" style="color: #f5f5f5;">Gen Z Math Competition</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="pulse-dot inline-block w-2 h-2 rounded-full" style="background: #34d399;"></span>
+          <span class="text-xs mono" style="color: #9ca3af;">LIVE</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="relative py-12 sm:py-16 px-4 sm:px-6 text-center">
+      <div class="max-w-3xl mx-auto anim-slide-up" id="latestupdate">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-6 mono" style="background: rgba(250,204,21,0.12); color: #facc15; border: 1px solid rgba(250,204,21,0.2);">
+          <i data-lucide="zap" style="width:14px;height:14px;"></i>
+          UPDATES HQ
+        </div>
+
+        <h1 id="hero-heading" class="text-3xl sm:text-5xl font-extrabold mb-4 leading-tight" style="color: #ffffff;">Latest Updates</h1>
+        <p id="hero-sub" class="text-base sm:text-lg max-w-xl mx-auto" style="color: #9ca3af;">
+          Stay in the loop with competition news, results drops, and everything you need to dominate the math game.
+        </p>
+      </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
+
+      <!-- ADMIN INSTRUCTIONS -->
+      <div class="mb-8 p-4 rounded-xl" style="background: rgba(250,204,21,0.1); border: 1px solid rgba(250,204,21,0.2);">
+        <p class="text-sm" style="color: #f5f5f5;">
+          <strong style="color: #facc15;">📌 Admin Only:</strong>
+          This page displays updates you add directly in the code. Edit the
+          <code style="background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 4px;">allPosts</code>
+          array below to manage your announcements.
+        </p>
+      </div>
+
+      <!-- FILTER TABS -->
+      <div class="flex gap-2 mb-8 flex-wrap" id="checkresults">
+        <button onclick="filterPosts('all')" data-filter="all" class="filter-btn px-4 py-2 rounded-lg text-xs font-semibold mono transition-all" style="background: #facc15; color: #0f0f1a;">ALL</button>
+        <button onclick="filterPosts('announcement')" data-filter="announcement" class="filter-btn px-4 py-2 rounded-lg text-xs font-semibold mono transition-all" style="background: rgba(255,255,255,0.06); color: #9ca3af;">ANNOUNCEMENTS</button>
+        <button onclick="filterPosts('results')" data-filter="results" class="filter-btn px-4 py-2 rounded-lg text-xs font-semibold mono transition-all" style="background: rgba(255,255,255,0.06); color: #9ca3af;">RESULTS</button>
+        <button onclick="filterPosts('general')" data-filter="general" class="filter-btn px-4 py-2 rounded-lg text-xs font-semibold mono transition-all" style="background: rgba(255,255,255,0.06); color: #9ca3af;">GENERAL</button>
+      </div>
+
+      <!-- POSTS LIST -->
+      <div id="posts-list" class="space-y-5"></div>
+
+      <!-- EMPTY STATE -->
+      <div id="empty-state" class="text-center py-20 anim-fade" style="display:none;">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4" style="background: rgba(255,255,255,0.04);">
+          <i data-lucide="megaphone" style="width:28px;height:28px;color:#4b5563;"></i>
+        </div>
+        <p class="text-lg font-semibold" style="color: #6b7280;">No updates yet</p>
+        <p class="text-sm mt-1" style="color: #4b5563;">Add your first update inside the code.</p>
+      </div>
+
+      <!-- LIMIT WARNING -->
+      <div id="limit-warning" class="hidden mt-4 p-4 rounded-xl text-sm font-medium" style="background: rgba(239,68,68,0.12); color: #f87171; border: 1px solid rgba(239,68,68,0.2);">
+        ⚠️ Maximum limit of 999 updates reached. Please delete some old updates to post new ones.
+      </div>
+
+      <br>
+
+      <!-- PRIVACY POLICY -->
+      <div class="mb-8 p-4 rounded-xl" id="privacypolicy" style="background: rgba(250,204,21,0.1); border: 1px solid rgba(250,204,21,0.2);">
+        <h2 class="text-lg font-bold mb-3" style="color: #facc15;">Privacy Policy</h2>
+        <p class="text-sm leading-7" style="color: #f5f5f5;">
+          At <strong>Gen Z Math Competition</strong>, we value your privacy and are committed to protecting your personal information.
+          Any details you provide during registration, including your name, email address, phone number, school information, and other submitted data,
+          will be used strictly for competition registration, communication, participant verification, result processing, and related administrative purposes.
+          We do not sell, rent, or misuse your personal information. Your data will only be accessed by authorized persons involved in organizing and managing
+          the competition. By registering for the Gen Z Math Competition, you agree to the collection and use of your information for official competition purposes.
+        </p>
+      </div>
+
+      <!-- TERMS & CONDITIONS -->
+      <div class="mb-8 p-4 rounded-xl" id="termsconditions" style="background: rgba(250,204,21,0.1); border: 1px solid rgba(250,204,21,0.2);">
+        <h2 class="text-lg font-bold mb-3" style="color: #facc15;">Terms &amp; Conditions</h2>
+        <p class="text-sm leading-7 mb-3" style="color: #f5f5f5;">
+          By registering for or participating in the <strong>Gen Z Math Competition</strong>, all participants, parents, and guardians agree to abide by the rules, guidelines, and decisions made by the competition organizers.
+        </p>
+        <p class="text-sm leading-7 mb-3" style="color: #f5f5f5;">
+          All information provided during registration must be accurate, complete, and truthful. Any false, misleading, or incomplete information may lead to disqualification from the competition.
+        </p>
+        <p class="text-sm leading-7 mb-3" style="color: #f5f5f5;">
+          Participants are expected to maintain honesty, discipline, and good conduct throughout the competition. Any form of examination malpractice, impersonation, cheating, misconduct, or violation of competition rules may result in immediate disqualification.
+        </p>
+        <p class="text-sm leading-7 mb-3" style="color: #f5f5f5;">
+          The organizers reserve the right to review, verify, and make final decisions regarding participant eligibility, submitted information, results, prizes, and disciplinary actions where necessary.
+        </p>
+        <p class="text-sm leading-7 mb-3" style="color: #f5f5f5;">
+          Competition schedules, rules, prizes, and participation requirements may be updated, adjusted, or modified when necessary. Participants will be notified through the official communication channels provided on the platform.
+        </p>
+        <p class="text-sm leading-7" style="color: #f5f5f5;">
+          By continuing with registration or participation, you confirm that you have read, understood, and agreed to these Terms &amp; Conditions of the Gen Z Math Competition.
+        </p>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="py-8 px-4 text-center" style="border-top: 1px solid rgba(255,255,255,0.05);">
+      <p id="footer-text" class="text-xs mono" style="color: #4b5563;">© 2025 Gen Z Math Competition. All rights reserved.</p>
+    </footer>
+
+    <!-- TOAST -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[200] px-5 py-3 rounded-xl text-sm font-semibold shadow-lg transition-all" style="display:none; background: #1a1a2e; color: #34d399; border: 1px solid rgba(52,211,153,0.2);">
+      <span id="toast-msg"></span>
+    </div>
+  </div>
+
+  <script>
+    let currentFilter = 'all';
+
+    let allPosts = [
+      {
+        id: '1',
+        title: 'Round 2 Results Are Live! 🏆',
+        content: 'Congratulations to all participants! Click below to view the official result file.',
+        category: 'results',
+        media_url: 'https://nerdc.gov.ng/content_manager/primary/pri1-3_nvc.pdf',
+        media_type: 'pdf',
+        pinned: true,
+        created_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString()
+      },
+      {
+        id: '2',
+        title: 'Finals Registration Now Open 📝',
+        content: 'Mark your calendars! Finals registration opens tomorrow at 9 AM EST. Spots are limited, so register early to secure your place.',
+        category: 'announcement',
+        media_url: '',
+        media_type: '',
+        pinned: true,
+        created_at: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
+      },
+      {
+        id: '3',
+        title: 'Top 10 Leaderboard',
+        content: 'See the latest leaderboard image below.',
+        category: 'results',
+        media_url: 'https://example.com/top10-leaderboard.jpg',
+        media_type: 'image',
+        pinned: false,
+        created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()
+      }
+    ];
+
+    const defaultConfig = {
+      site_title: 'Gen Z Math Competition',
+      page_heading: 'Latest Updates',
+      subheading_text: 'Stay in the loop with competition news, results drops, and everything you need to dominate the math game.',
+      footer_text: '© 2025 Gen Z Math Competition. All rights reserved.',
+      background_color: '#0f0f1a',
+      surface_color: '#1a1a2e',
+      text_color: '#f5f5f5',
+      accent_color: '#facc15',
+      secondary_action_color: '#34d399',
+      font_family: 'Sora',
+      font_size: 16
+    };
+
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => {
+        const c = key => config[key] || defaultConfig[key];
+        const font = c('font_family');
+        const baseSize = c('font_size');
+        const baseFontStack = `${font}, 'Sora', sans-serif`;
+
+        document.getElementById('app').style.background = c('background_color');
+        document.getElementById('nav-title').textContent = c('site_title');
+        document.getElementById('hero-heading').textContent = c('page_heading');
+        document.getElementById('hero-sub').textContent = c('subheading_text');
+        document.getElementById('footer-text').textContent = c('footer_text');
+
+        document.getElementById('nav-title').style.fontFamily = baseFontStack;
+        document.getElementById('hero-heading').style.fontFamily = baseFontStack;
+        document.getElementById('hero-sub').style.fontFamily = baseFontStack;
+        document.getElementById('hero-heading').style.fontSize = `${baseSize * 2.5}px`;
+        document.getElementById('hero-sub').style.fontSize = `${baseSize}px`;
+        document.getElementById('nav-title').style.fontSize = `${baseSize * 1.1}px`;
+
+        document.querySelectorAll('.card-update').forEach(card => {
+          card.style.background = c('surface_color');
+          card.style.fontFamily = baseFontStack;
+        });
+
+        document.getElementById('nav-title').style.color = c('text_color');
+        document.getElementById('hero-heading').style.color = c('text_color');
+
+        const accent = c('accent_color');
+        document.querySelectorAll('.filter-btn[data-filter="' + currentFilter + '"]').forEach(b => {
+          b.style.background = accent;
+        });
+      },
+      mapToCapabilities: (config) => {
+        const c = key => config[key] || defaultConfig[key];
+        const mkColor = (key) => ({
+          get: () => c(key),
+          set: (v) => { config[key] = v; window.elementSdk.setConfig({ [key]: v }); }
+        });
+
+        return {
+          recolorables: [
+            mkColor('background_color'),
+            mkColor('surface_color'),
+            mkColor('text_color'),
+            mkColor('accent_color'),
+            mkColor('secondary_action_color')
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => c('font_family'),
+            set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+          },
+          fontSizeable: {
+            get: () => c('font_size'),
+            set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
+          }
+        };
+      },
+      mapToEditPanelValues: (config) => new Map([
+        ['site_title', config.site_title || defaultConfig.site_title],
+        ['page_heading', config.page_heading || defaultConfig.page_heading],
+        ['subheading_text', config.subheading_text || defaultConfig.subheading_text],
+        ['footer_text', config.footer_text || defaultConfig.footer_text]
+      ])
+    });
+
+    function renderPosts() {
+      const container = document.getElementById('posts-list');
+      const empty = document.getElementById('empty-state');
+
+      let filtered = currentFilter === 'all'
+        ? [...allPosts]
+        : allPosts.filter(p => p.category === currentFilter);
+
+      filtered.sort((a, b) => {
+        if (a.pinned && !b.pinned) return -1;
+        if (!a.pinned && b.pinned) return 1;
+        return new Date(b.created_at) - new Date(a.created_at);
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        empty.style.display = 'block';
+        lucide.createIcons();
+        return;
+      }
+
+      empty.style.display = 'none';
+      container.innerHTML = '';
+
+      filtered.forEach((post, idx) => {
+        const card = createCard(post, idx);
+        container.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    function createCard(post, idx) {
+      const card = document.createElement('div');
+      card.className = `card-update rounded-2xl p-5 sm:p-6 anim-slide-up cat-${post.category}`;
+      card.dataset.postId = post.id;
+      card.style.background = '#1a1a2e';
+      card.style.border = '1px solid rgba(255,255,255,0.06)';
+      card.style.animationDelay = `${idx * 0.05}s`;
+      updateCardContent(card, post);
+      return card;
+    }
+
+    function updateCardContent(card, post) {
+      const date = new Date(post.created_at);
+      const timeStr =
+        date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) +
+        ' · ' +
+        date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+      const catEmoji =
+        post.category === 'announcement' ? '📢' :
+        post.category === 'results' ? '🏆' : '💬';
+
+      const catLabel = post.category.charAt(0).toUpperCase() + post.category.slice(1);
+
+      let mediaHtml = '';
+
+      if (post.media_url) {
+        if (post.media_type === 'pdf') {
+          mediaHtml = `
+            <div class="mt-4 media-frame">
+              <div class="p-4 flex items-center gap-3 flex-wrap" style="background: rgba(255,255,255,0.03);">
+                <i data-lucide="file-text" style="width:24px;height:24px;color:#facc15;"></i>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-medium truncate" style="color: #f5f5f5;">Competition PDF File</p>
+                  <p class="text-xs truncate" style="color: #6b7280;">${escHtml(post.media_url)}</p>
+                </div>
+                <a href="${escHtml(post.media_url)}" target="_blank" rel="noopener noreferrer"
+                   class="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold"
+                   style="background: rgba(250,204,21,0.15); color: #facc15;">
+                  <i data-lucide="external-link" style="width:12px;height:12px;"></i>
+                  Open PDF
+                </a>
+              </div>
+              <iframe
+                src="${escHtml(post.media_url)}"
+                class="w-full"
+                style="height: 400px; border: none; background: #fff;"
+                loading="lazy"
+                title="PDF Document">
+              </iframe>
+            </div>
+          `;
+        } else {
+          mediaHtml = `
+            <div class="mt-4 media-frame">
+              <img
+                src="${escHtml(post.media_url)}"
+                alt="Update media"
+                class="w-full rounded-lg"
+                style="max-height: 500px; object-fit: contain; background: rgba(255,255,255,0.03);"
+                loading="lazy"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              >
+
+              <div class="p-4 items-center gap-3 flex-wrap" style="display:none; background: rgba(255,255,255,0.03);">
+                <i data-lucide="image" style="width:24px;height:24px;color:#facc15;"></i>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-medium truncate" style="color: #f5f5f5;">Image File</p>
+                  <p class="text-xs truncate" style="color: #6b7280;">${escHtml(post.media_url)}</p>
+                </div>
+                <a href="${escHtml(post.media_url)}" target="_blank" rel="noopener noreferrer"
+                   class="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold"
+                   style="background: rgba(250,204,21,0.15); color: #facc15;">
+                  <i data-lucide="external-link" style="width:12px;height:12px;"></i>
+                  Open Image
+                </a>
+              </div>
+
+              <div class="mt-3 p-3 flex justify-end" style="background: rgba(255,255,255,0.02);">
+                <a href="${escHtml(post.media_url)}" target="_blank" rel="noopener noreferrer"
+                   class="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold"
+                   style="background: rgba(250,204,21,0.15); color: #facc15;">
+                  <i data-lucide="external-link" style="width:12px;height:12px;"></i>
+                  Open Full Image
+                </a>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      card.innerHTML = `
+        <div class="flex items-center gap-2 flex-wrap mb-3">
+          ${post.pinned ? '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-bold mono" style="background: rgba(250,204,21,0.15); color: #facc15;"><i data-lucide="pin" style="width:10px;height:10px;"></i> PINNED</span>' : ''}
+          <span class="badge-${post.category} px-2.5 py-0.5 rounded-md text-xs font-semibold mono">${catEmoji} ${catLabel}</span>
+        </div>
+        <h3 class="text-lg sm:text-xl font-bold mb-2" style="color: #f5f5f5;">${escHtml(post.title)}</h3>
+        <p class="text-sm leading-relaxed mb-3" style="color: #a1a1aa; white-space: pre-wrap;">${escHtml(post.content)}</p>
+        ${mediaHtml}
+        <p class="text-xs mono mt-4" style="color: #4b5563;">${timeStr}</p>
+      `;
+    }
+
+    function filterPosts(cat) {
+      currentFilter = cat;
+
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        if (b.dataset.filter === cat) {
+          b.style.background = '#facc15';
+          b.style.color = '#0f0f1a';
+        } else {
+          b.style.background = 'rgba(255,255,255,0.06)';
+          b.style.color = '#9ca3af';
+        }
+      });
+
+      renderPosts();
+    }
+
+    function showToast(msg, isError = false) {
+      const t = document.getElementById('toast');
+      const m = document.getElementById('toast-msg');
+
+      m.textContent = msg;
+      t.style.display = 'block';
+      t.style.color = isError ? '#f87171' : '#34d399';
+      t.style.borderColor = isError ? 'rgba(239,68,68,0.2)' : 'rgba(52,211,153,0.2)';
+
+      clearTimeout(t._timeout);
+      t._timeout = setTimeout(() => {
+        t.style.display = 'none';
+      }, 2500);
+    }
+
+    function escHtml(str) {
+      if (!str) return '';
+      const d = document.createElement('div');
+      d.textContent = str;
+      return d.innerHTML;
+    }
+
+    renderPosts();
+    lucide.createIcons();
+  </script>
+</body>
+</html>
